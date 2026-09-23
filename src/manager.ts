@@ -410,10 +410,17 @@ export class QuotaManager {
    */
   registerProvider(provider: QuotaProvider): void {
     this.providers.set(provider.id, provider)
+    if (this.context) {
+      void this.refresh(this.context)
+    }
   }
 
   unregisterProvider(id: string): boolean {
-    return this.providers.delete(id)
+    const deleted = this.providers.delete(id)
+    if (deleted && this.context) {
+      void this.refresh(this.context)
+    }
+    return deleted
   }
 
   getProviders(): QuotaProvider[] {
@@ -426,6 +433,9 @@ export class QuotaManager {
    */
   submitSource(source: QuotaSource): void {
     this.pushedSources.set(source.id, source)
+    if (this.context) {
+      void this.refresh(this.context)
+    }
   }
 
   /**
@@ -449,6 +459,9 @@ export class QuotaManager {
       existing.metrics.push(metric)
     }
     this.pushedSources.set(sourceId, existing)
+    if (this.context) {
+      void this.refresh(this.context)
+    }
   }
 
   /**
@@ -456,10 +469,17 @@ export class QuotaManager {
    */
   registerCustomSection(section: CustomQuotaSection): void {
     this.customSections.set(section.id, section)
+    if (this.context) {
+      void this.refresh(this.context)
+    }
   }
 
   unregisterCustomSection(id: string): boolean {
-    return this.customSections.delete(id)
+    const deleted = this.customSections.delete(id)
+    if (deleted && this.context) {
+      void this.refresh(this.context)
+    }
+    return deleted
   }
 
   getCustomSections(): CustomQuotaSection[] {
@@ -471,10 +491,17 @@ export class QuotaManager {
    */
   registerModalOverride(override: QuotaModalOverride): void {
     this.modalOverrides.set(override.id, override)
+    if (this.context) {
+      void this.refresh(this.context)
+    }
   }
 
   unregisterModalOverride(id: string): boolean {
-    return this.modalOverrides.delete(id)
+    const deleted = this.modalOverrides.delete(id)
+    if (deleted && this.context) {
+      void this.refresh(this.context)
+    }
+    return deleted
   }
 
   getModalOverrides(): QuotaModalOverride[] {

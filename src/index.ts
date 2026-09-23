@@ -213,15 +213,18 @@ export async function register(registry: PluginRegistry): Promise<void> {
 
   // 6. Register RPC Methods
   registry.registerRpc('quota.getReport', async () => {
+    quotaManager.drainPendingProviders()
     return await quotaManager.getQuotaReport()
   })
 
   registry.registerRpc('quota.refresh', async () => {
+    quotaManager.drainPendingProviders()
     const report = await quotaManager.refresh(context)
     return { success: true, report }
   })
 
   registry.registerRpc('quota.getModalContent', async () => {
+    quotaManager.drainPendingProviders()
     const nodes = await quotaManager.renderModalContent()
     return { nodes }
   })
