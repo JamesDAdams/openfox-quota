@@ -1,0 +1,40 @@
+{
+  "name": "openfox-quota",
+  "version": "2.0.0",
+  "description": "Usage and quota tracking plugin for OpenFox with generic providers and custom component overrides",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "openfox": {
+    "apiVersion": 2,
+    "displayName": "Usage & Quotas",
+    "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#3B82F6\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48 2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48 2.83-2.83\"/><circle cx=\"12\" cy=\"12\" r=\"4\"/></svg>",
+    "description": "Monitor model usage, windowed rate limits, token balances, and custom quota components across all providers.",
+    "entry": "./dist/index.js",
+    "capabilities": [
+      "ui",
+      "rpc",
+      "settings",
+      "tools",
+      "hooks",
+      "notifications"
+    ],
+    "timeoutMs": 15000
+  },
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run --passWithNoTests",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.0",
+    "tsup": "^8.4.0",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.0"
+  },
+  "license": "MIT"
+}
